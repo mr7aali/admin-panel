@@ -4,11 +4,21 @@ import Breadcrumb from "../Breadcrumbs/Breadcrumb";
 import Form from "@/hookForms/Form";
 import FormInput from "@/hookForms/FormInput";
 import { Specification } from "@/constant/form";
+// import { groupConsecutiveArray } from "@/js/groupConsecutiveNumbers";
 
 const ReusableForm = () => {
   const onSubmit = (data: any) => {
     console.log(data);
   };
+  const printInputInPattern = (index: number): boolean => {
+    const towInputElementIndex = [
+      4, 5, 9, 10, 14, 15, 19, 20, 24, 25, 29, 30, 34, 35, 39, 40, 44, 45, 49,
+      50,
+    ];
+    return !towInputElementIndex.includes(index);
+  };
+  console.log(printInputInPattern(51));
+
   return (
     <section>
       <Breadcrumb pageName="Add Post" />
@@ -24,49 +34,23 @@ const ReusableForm = () => {
             </div>
             <Form submitHandler={onSubmit}>
               <div className="p-6.5">
-                <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                  <div className="w-full xl:w-1/2">
-                    <FormInput
-                      label="First Name"
-                      name="first name"
-                      placeholder="Enter your first name"
-                    />
-                  </div>
+                
+               
 
-                  <div className="w-full xl:w-1/2">
-                    <FormInput
-                      label="Last name"
-                      name="last name"
-                      placeholder="Enter your last name"
-                    />
-                  </div>
-                  <div className="w-full xl:w-1/2">
-                    <FormInput
-                      label="Last name"
-                      name="last name"
-                      placeholder="Enter your last name"
-                    />
-                  </div>
+                <div  className="grid grid-cols-12  gap-x-6">
+                  {Specification.Processor.map((Item, i) => (
+                    <div key={i} className={`mb-4.5 ${printInputInPattern(i+1)? "col-span-4":"col-span-6"}`}>
+                      <FormInput
+                        label={Item.fieldName}
+                        type={Item.type}
+                        placeholder={`Enter your ${Item.fieldName}`}
+                        name={Item.name}
+                      />
+                    </div>
+                  ))}
+                 
                 </div>
-
-                <div style={{border:"1px solid red"}} className="mb-4.5">
-                  <FormInput
-                    label="Email"
-                    type="email"
-                    placeholder="Enter your email address"
-                    name="email"
-                  />
-                </div>
-                {Specification.product.map((Item, index) => (
-                  <div key={index} className="mb-4.5">
-                    <FormInput
-                      label={Item.fieldName}
-                      type={Item.type}
-                      placeholder={`Enter your ${Item.fieldName}`}
-                      name={Item.name}
-                    />
-                  </div>
-                ))}
+            
                 <button
                   type="submit"
                   className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
