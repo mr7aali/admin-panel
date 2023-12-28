@@ -9,7 +9,7 @@ type IInput = {
   value?: string;
   placeholder?: string;
   validation?: object;
-  label:string;
+  label: string;
 };
 const FormInput = ({
   id,
@@ -18,9 +18,12 @@ const FormInput = ({
   type,
   validation,
   value,
-  label
+  label,
 }: IInput) => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
   return (
     <>
       <label className="mb-2.5 block text-black dark:text-white">
@@ -28,6 +31,9 @@ const FormInput = ({
       </label>
       <Controller
         control={control}
+        rules={{
+          // required: `${label} field cannot be empty!`,
+        }}
         name={name}
         render={({ field }) => (
           <input
@@ -40,6 +46,14 @@ const FormInput = ({
           />
         )}
       />
+      {errors[name] && (
+        <p
+          style={{ color: "#ff3333", fontSize: "14px" }}
+          className="text-red font-medium mt-2 ml-0 font-serif flex items-center"
+        >
+          Error : {errors[name]?.message as string}
+        </p>
+      )}
     </>
   );
 };

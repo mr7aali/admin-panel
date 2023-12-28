@@ -1,8 +1,10 @@
-import { ISpecification } from "@/types/Specification";
+// import { ISpecification } from "@/types/Specification";
 
+interface ISpecification {
+    [key: string]: Array<{ fieldName: string; name: string; type: string }>;
+}
 
-
-export const Specification :ISpecification= {
+export const Specification: ISpecification = {
     product: [
         { fieldName: "Name", name: "name", type: "text" },
         { fieldName: "Price", name: "price", type: "text" },
@@ -118,3 +120,23 @@ export const Specification :ISpecification= {
     ],
 
 }
+
+export const formName = [
+    "product",
+    "Display",
+    "Processor",
+    // "Audio",
+    // "Connectivity",
+    // "Power",
+    // "Memory",
+    // "Storage",
+    // "Graphics",
+    // "Keyboard",
+    // "Camera",
+    // "Ports_Slots",
+    // "Security",
+    // "Physical_Specification",
+    // "Rear_Camera",
+    // "Front_Camera",
+    // "Network_Connectivity",
+]

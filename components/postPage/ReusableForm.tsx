@@ -1,24 +1,20 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Breadcrumb from "../Breadcrumbs/Breadcrumb";
 import Form from "@/hookForms/Form";
 import FormInput from "@/hookForms/FormInput";
-import { Specification } from "@/constant/form";
+import { Specification, formName } from "@/constant/form";
+import { printInputInPattern } from "@/js/FormHelpers";
 // import { groupConsecutiveArray } from "@/js/groupConsecutiveNumbers";
 
 const ReusableForm = () => {
+  const [currentForm, setCurrentForm] = useState(0);
+ 
+  // useEffect(() => {}, []);
   const onSubmit = (data: any) => {
     console.log(data);
   };
-  const printInputInPattern = (index: number): boolean => {
-    const towInputElementIndex = [
-      4, 5, 9, 10, 14, 15, 19, 20, 24, 25, 29, 30, 34, 35, 39, 40, 44, 45, 49,
-      50,
-    ];
-    return !towInputElementIndex.includes(index);
-  };
-  console.log(printInputInPattern(51));
-
+ 
   return (
     <section>
       <Breadcrumb pageName="Add Post" />
@@ -29,17 +25,19 @@ const ReusableForm = () => {
           <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
             <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
               <h3 className="font-medium text-black dark:text-white">
-                Contact Form
+                {formName[currentForm]} Form
               </h3>
             </div>
             <Form submitHandler={onSubmit}>
               <div className="p-6.5">
-                
-               
-
-                <div  className="grid grid-cols-12  gap-x-6">
-                  {Specification.Processor.map((Item, i) => (
-                    <div key={i} className={`mb-4.5 ${printInputInPattern(i+1)? "col-span-4":"col-span-6"}`}>
+                <div className="grid grid-cols-12  gap-x-6">
+                  {Specification[formName[currentForm]].map((Item, i) => (
+                    <div
+                      key={i}
+                      className={`mb-4.5 ${
+                        printInputInPattern(i + 1) ? "col-span-6" : "col-span-4"
+                      }`}
+                    >
                       <FormInput
                         label={Item.fieldName}
                         type={Item.type}
@@ -48,15 +46,48 @@ const ReusableForm = () => {
                       />
                     </div>
                   ))}
-                 
                 </div>
-            
-                <button
-                  type="submit"
-                  className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
-                >
-                  Send Message
-                </button>
+
+                <div className="grid grid-cols-2 gap-6">
+                  <button
+                    onClick={() =>
+                      setCurrentForm((pre) => (currentForm === 0 ? 0 : pre - 1))
+                    }
+                    disabled={currentForm === 0}
+                    className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
+                  >
+                    Previous Step
+                  </button>
+                  {!(currentForm === formName.length - 1) ? (
+                    <button
+                      onClick={() =>
+                        setCurrentForm((pre) =>
+                          currentForm < formName.length - 1
+                            ? pre + 1
+                            : formName.length - 1
+                        )
+                      }
+                      type="submit"
+                      className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
+                    >
+                      Next Step
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() =>
+                        setCurrentForm((pre) =>
+                          currentForm < formName.length - 1
+                            ? pre + 1
+                            : formName.length - 1
+                        )
+                      }
+                      type="submit"
+                      className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
+                    >
+                      Submit
+                    </button>
+                  )}
+                </div>
               </div>
             </Form>
           </div>
