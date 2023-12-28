@@ -122,7 +122,7 @@ export const Specification: ISpecification = {
 }
 
 export const formName = [
-    "product",
+    // "product",
     "Display",
     "Processor",
     "Audio",
