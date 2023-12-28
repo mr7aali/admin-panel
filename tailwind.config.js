@@ -48,7 +48,8 @@ module.exports = {
       success: "#219653",
       danger: "#D34053",
       warning: "#FFA70B",
-      red: "#ff3333"
+      red: "#ff3333",
+      green:"#008000"
     },
     screens: {
       "2xsm": "375px",
