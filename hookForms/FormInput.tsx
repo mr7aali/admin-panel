@@ -32,7 +32,11 @@ const FormInput = ({
       <Controller
         control={control}
         rules={{
-          // required: `${label} field cannot be empty!`,
+          required: `${label} field cannot be empty!`,
+          minLength: {
+            value: 4,
+            message: `${label} field must be at least 4 characters long.!`,
+          },
         }}
         name={name}
         render={({ field }) => (
