@@ -15,7 +15,7 @@ export const Specification: ISpecification = {
         { fieldName: "Image", name: "image", type: "text" },
         { fieldName: "Warranty", name: "warranty", type: "text" },
     ],
-    Display: [
+    display: [
         { fieldName: "Size", type: "text", name: "Size" },
         { fieldName: "Type", type: "text", name: "Type" },
         { fieldName: "Resolution", type: "text", name: "Resolution" },
@@ -23,7 +23,7 @@ export const Specification: ISpecification = {
         { fieldName: "Refresh Rate", type: "text", name: "Refresh_Rate" },
         { fieldName: "Features", type: "text", name: "Features" },
     ],
-    Processor: [
+    processor: [
         { fieldName: "Brand", type: "text", name: "Brand" },
         { fieldName: "Model", type: "text", name: "Model" },
         { fieldName: "Generation", type: "text", name: "Generation" },
@@ -32,47 +32,47 @@ export const Specification: ISpecification = {
         { fieldName: "Thread", type: "text", name: "Thread" },
         { fieldName: "Cpu cache", type: "text", name: "Cpu_cache" },
     ],
-    Audio: [
+    audio: [
         { fieldName: "Speaker", type: "text", name: "Speaker" },
         { fieldName: "Speaker Details", type: "text", name: "Speaker_Details" },
     ],
-    Connectivity: [
+    connectivity: [
         { fieldName: "Display Port", type: "text", name: "Display_Port" },
         { fieldName: "HDMI", type: "text", name: "HDMI" },
     ],
-    Power: [
+    power: [
         { fieldName: "Type", type: "text", name: "Type" },
         { fieldName: "Voltage", type: "text", name: "Voltage" },
     ],
-    Memory: [
+    memory: [
         { fieldName: "RAM", type: "text", name: "RAM" },
         { fieldName: "RAM Type", type: "text", name: "RAM_Type" },
         { fieldName: "Removable", type: "text", name: "Removable" },
         { fieldName: "Total Ram Slot", type: "text", name: "Total_Ram_Slot" },
         { fieldName: "Max Ram Capacity", type: "text", name: "Max_Ram_Capacity" },
     ],
-    Storage: [
+    storage: [
         { fieldName: "Storage Type", type: "text", name: "Storage_Type" },
         { fieldName: "Storage Capacity", type: "text", name: "Storage_Capacity" },
         { fieldName: "hdd rpm", type: "text", name: "hdd_rpm" },
         { fieldName: "Extra M2 Slot", type: "text", name: "Extra_M2_Slot" },
     ],
-    Graphics: [
+    graphics: [
         { fieldName: "Model", type: "text", name: "Model" },
         { fieldName: "Memory", type: "text", name: "Memory" },
     ],
-    Keyboard: [
+    keyboard: [
         { fieldName: "Type", type: "text", name: "Type" },
         { fieldName: "Features", type: "text", name: "Features" },
         { fieldName: "Touch Pad", type: "text", name: "Touch_Pad" },
     ],
-    Camera: [
+    camera: [
         { fieldName: "Web Cam", type: "text", name: "Web_Cam" },
         { fieldName: "Speaker", type: "text", name: "Speaker" },
         { fieldName: "Microphone", type: "text", name: "Microphone" },
         { fieldName: "Audio Feature", type: "text", name: "Audio_Feature" },
     ],
-    Ports_Slots: [
+    portsSlots: [
         { fieldName: "Optical Drive", type: "text", name: "Optical_Drive" },
         { fieldName: "CardReader", type: "text", name: "CardReader" },
         { fieldName: "VGA", type: "text", name: "VGA" },
@@ -82,28 +82,28 @@ export const Specification: ISpecification = {
         { fieldName: "USB 3 Port", type: "text", name: "USB_3_Port" },
         { fieldName: "USB TypeC", type: "text", name: "USB_TypeC" },
     ],
-    Security: [
+    security: [
         { fieldName: "Fingerprint Sensor", type: "text", name: "Fingerprint_Sensor" },
         { fieldName: "Security Chip", type: "text", name: "Security_Chip" },
     ],
-    Physical_Specification: [
+    physicalSpecification: [
         { fieldName: "Color", type: "text", name: "Color" },
         { fieldName: "Dimensions", type: "text", name: "Dimensions" },
         { fieldName: "Weight", type: "text", name: "Weight" },
         { fieldName: "Body Material", type: "text", name: "Body_Material" },
     ],
-    Rear_Camera: [
+    rearCamera: [
         { fieldName: "Resolution", type: "text", name: "Resolution" },
         { fieldName: "Feature", type: "text", name: "Feature" },
         { fieldName: "VideoRecording", type: "text", name: "VideoRecording" },
     ],
-    Front_Camera: [
+    frontCamera: [
         { fieldName: "Resolution", type: "text", name: "Resolution" },
         { fieldName: "Feature", type: "text", name: "Feature" },
         { fieldName: "VideoRecording", type: "text", name: "VideoRecording" },
 
     ],
-    Network_Connectivity: [
+    networkConnectivity: [
         { fieldName: "SIM", type: "text", name: "SIM" },
         { fieldName: "Network", type: "text", name: "Network" },
         { fieldName: "Wifi", type: "text", name: "Wifi" },
@@ -114,7 +114,7 @@ export const Specification: ISpecification = {
         { fieldName: "otg", type: "text", name: "otg" },
         { fieldName: "Audio Jack", type: "text", name: "Audio_Jack" },
     ],
-    Os: [
+    os: [
         { fieldName: "Os System", type: "text", name: "Os_System" },
         { fieldName: "Upgradable", type: "text", name: "Upgradable" },
     ],
@@ -122,21 +122,21 @@ export const Specification: ISpecification = {
 }
 
 export const formName = [
-    // "product",
-    "Display",
-    "Processor",
-    "Audio",
-    "Connectivity",
-    "Power",
-    "Memory",
-    "Storage",
-    "Graphics",
-    "Keyboard",
-    "Camera",
-    "Ports_Slots",
-    "Security",
-    "Physical_Specification",
-    "Rear_Camera",
-    "Front_Camera",
-    "Network_Connectivity",
+    "product",
+    "display",
+    "processor",
+    "audio",
+    "connectivity",
+    "power",
+    "memory",
+    "storage",
+    "graphics",
+    "keyboard",
+    "camera",
+    "portsSlots",
+    "security",
+    "physicalSpecification",
+    "rearCamera",
+    "frontCamera",
+    "networkConnectivity",
 ];

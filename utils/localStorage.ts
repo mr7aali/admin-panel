@@ -9,6 +9,7 @@ export const getFormLocalStorage = (key: string) => {
         return {}
     }
     const data = localStorage.getItem(key);
+    
     if (!data) {
         return {}
     }

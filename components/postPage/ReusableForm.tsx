@@ -1,13 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Breadcrumb from "../Breadcrumbs/Breadcrumb";
 import Form from "@/hookForms/Form";
 import FormInput from "@/hookForms/FormInput";
 import { Specification, formName } from "@/constant/form";
 import { printInputInPattern } from "@/js/FormHelpers";
 import { AiTwotoneDelete } from "react-icons/ai";
-import { getFormLocalStorage, setInLocalStorage } from "@/utils/localStorage";
-import { KEY_productFormData } from "@/constant/storageKey";
 
 const ReusableForm = () => {
   // const NeededformName = ["product"];
@@ -17,29 +15,30 @@ const ReusableForm = () => {
   const [currentFormName, setCurrentFormName] = useState(
     neededFormName[currentForm]
   );
+
   const onSubmit = (currentData: any) => {
-    
-    
-    const filedName = currentFormName;
-    const previousData = getFormLocalStorage(KEY_productFormData);
-    const productData = { ...previousData, [filedName]: currentData };
-    setInLocalStorage(KEY_productFormData, productData);
+    console.log(`${currentFormName}'s form`, currentData);
+   
+   
   };
+
   const handleSelectedForm = (e: any) => {
     const select = e.target.value;
     setNeededFormName((pre) => [...pre, select]);
     setGiveForm(givenForm.filter((item) => item !== select));
+    console.log("handleSelectedForm");
   };
   const handleRemoveFromNeededForm = (select: string) => {
     if (select === "product") return;
     setGiveForm((pre) => [...pre, select]);
     setNeededFormName(neededFormName.filter((item) => item !== select));
+    console.log("handleRemoveFromNeededForm");
   };
 
   useEffect(() => {
     setCurrentFormName(neededFormName[currentForm]);
   }, [currentForm, neededFormName]);
-  
+
   return (
     <section>
       <Breadcrumb pageName="Add Post" />
@@ -53,72 +52,79 @@ const ReusableForm = () => {
                 {neededFormName[currentForm]?.replace(/_/g, " ")} Form
               </h3>
             </div>
-            <Form submitHandler={onSubmit}>
-              <div className="p-6.5">
-                <div className="grid grid-cols-12  gap-x-6">
-                  {Specification[neededFormName[currentForm]]?.map(
-                    (Item, i) => (
-                      <div
-                        key={i}
-                        className={`mb-4.5 ${
-                          printInputInPattern(i + 1)
-                            ? "col-span-6"
-                            : "col-span-4"
-                        }`}
-                      >
-                        <FormInput
-                          label={Item.fieldName}
-                          type={Item.type}
-                          placeholder={`Enter your ${Item.fieldName}`}
-                          name={Item.name}
-                        />
-                      </div>
-                    )
-                  )}
-                </div>
+            <Suspense>
+              <Form submitHandler={onSubmit}>
+                <div className="p-6.5">
+                  <div className="grid grid-cols-12  gap-x-6">
+                    <Suspense  fallback={<p>Loading feed...</p>}>
+                      {Specification[neededFormName[currentForm]]?.map(
+                        (Item, i) => (
+                          <div
+                            key={i}
+                            className={`mb-4.5 ${
+                              printInputInPattern(i + 1)
+                                ? "col-span-6"
+                                : "col-span-4"
+                            }`}
+                          >
+                            <FormInput
+                              label={Item.fieldName}
+                              type={Item.type}
+                              placeholder={`Enter your ${Item.fieldName}`}
+                              name={Item.name}
+                            />
+                          </div>
+                        )
+                      )}
+                    </Suspense>
+                  </div>
 
-                <div className="grid grid-cols-2 gap-6">
-                  <button
-                    onClick={() =>
-                      setCurrentForm((pre) => (currentForm === 0 ? 0 : pre - 1))
-                    }
-                    disabled={currentForm === 0}
-                    className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
-                  >
-                    Previous Step
-                  </button>
-                  {!(currentForm === neededFormName.length - 1) ? (
+                  <div className="grid grid-cols-2 gap-6">
                     <button
                       onClick={() =>
                         setCurrentForm((pre) =>
-                          currentForm < neededFormName.length - 1
-                            ? pre + 1
-                            : neededFormName.length - 1
+                          currentForm === 0 ? 0 : pre - 1
                         )
                       }
-                      type="submit"
+                      disabled={currentForm === 0}
                       className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
                     >
-                      Next Step
+                      Previous Step
                     </button>
-                  ) : (
-                    <button
-                      onClick={() =>
-                        setCurrentForm((pre) =>
-                          currentForm < neededFormName.length - 1
-                            ? pre + 1
-                            : neededFormName.length - 1
-                        )
-                      }
-                      type="submit"
-                      className="flex w-full justify-center rounded bg-green p-3 font-medium text-gray"
-                    >
-                      Submit
-                    </button>
-                  )}
+                    {!(currentForm === neededFormName.length - 1) ? (
+                      <button
+                        onClick={() =>
+                          setCurrentForm((pre) =>
+                            currentForm < neededFormName.length - 1
+                              ? pre + 1
+                              : neededFormName.length - 1
+                          )
+                        }
+                        type="submit"
+                        className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
+                      >
+                        Next Step
+                      </button>
+                    ) : (
+                      <button
+                        type="submit"
+                        onClick={() => {
+                          setCurrentForm((pre) =>
+                            currentForm < neededFormName.length - 1
+                              ? pre + 1
+                              : neededFormName.length - 1
+                          );
+                          // handlePost();
+                        }}
+                        className="flex w-full justify-center rounded bg-green p-3 font-medium text-gray"
+                      >
+                        Submit
+                      </button>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </Form>
+              </Form>
+            </Suspense>
           </div>
         </div>
         {/*//! { selected form} */}
