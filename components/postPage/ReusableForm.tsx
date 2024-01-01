@@ -4,12 +4,14 @@ import Breadcrumb from "../Breadcrumbs/Breadcrumb";
 import Form from "@/hookForms/Form";
 import FormInput from "@/hookForms/FormInput";
 import { Specification, formName } from "@/constant/form";
-import { printInputInPattern } from "@/js/FormHelpers";
+import { printInputInPattern } from "@/js/FormHelpers/printInputInPattern";
 import { AiTwotoneDelete } from "react-icons/ai";
+import { forEachChild } from "typescript";
+import { InputFieldsValidator } from "@/js/FormHelpers/InputFieldsValidator";
 
 const ReusableForm = () => {
   // const NeededformName = ["product"];
-  const [currentForm, setCurrentForm] = useState(0);
+  const [currentForm, setCurrentForm] = useState<number>(0);
   const [givenForm, setGiveForm] = useState(formName);
   const [neededFormName, setNeededFormName] = useState(["product"]);
   const [currentFormName, setCurrentFormName] = useState(
@@ -17,21 +19,27 @@ const ReusableForm = () => {
   );
 
   const onSubmit = (currentData: any) => {
-    
-    console.log(`${currentFormName}'s form`, currentData);
+    const fomrInputFields = Specification.product.map((item) => item.name);
+    const gettingInputFields = Object.keys(currentData);
+
+    const data = InputFieldsValidator({
+      currentData,
+      fomrInputFields,
+      gettingInputFields,
+    });
+   
+    console.log(`${currentFormName}'s form`, data);
   };
 
   const handleSelectedForm = (e: any) => {
     const select = e.target.value;
     setNeededFormName((pre) => [...pre, select]);
     setGiveForm(givenForm.filter((item) => item !== select));
-    
   };
   const handleRemoveFromNeededForm = (select: string) => {
     if (select === "product") return;
     setGiveForm((pre) => [...pre, select]);
     setNeededFormName(neededFormName.filter((item) => item !== select));
-    
   };
 
   useEffect(() => {
@@ -55,27 +63,25 @@ const ReusableForm = () => {
               <Form submitHandler={onSubmit}>
                 <div className="p-6.5">
                   <div className="grid grid-cols-12  gap-x-6">
-                    <Suspense  fallback={<p>Loading feed...</p>}>
-                      {Specification[neededFormName[currentForm]]?.map(
-                        (Item, i) => (
-                          <div
-                            key={i}
-                            className={`mb-4.5 ${
-                              printInputInPattern(i + 1)
-                                ? "col-span-6"
-                                : "col-span-4"
-                            }`}
-                          >
-                            <FormInput
-                              label={Item.fieldName}
-                              type={Item.type}
-                              placeholder={`Enter your ${Item.fieldName}`}
-                              name={Item.name}
-                            />
-                          </div>
-                        )
-                      )}
-                    </Suspense>
+                    {Specification[neededFormName[currentForm]]?.map(
+                      (Item: any, i: number) => (
+                        <div
+                          key={i}
+                          className={`mb-4.5 ${
+                            printInputInPattern(i + 1)
+                              ? "col-span-6"
+                              : "col-span-4"
+                          }`}
+                        >
+                          <FormInput
+                            label={Item.fieldName}
+                            type={Item.type}
+                            placeholder={`Enter your ${Item.fieldName}`}
+                            name={Item.name}
+                          />
+                        </div>
+                      )
+                    )}
                   </div>
 
                   <div className="grid grid-cols-2 gap-6">
