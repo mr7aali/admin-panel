@@ -17,22 +17,21 @@ const ReusableForm = () => {
   );
 
   const onSubmit = (currentData: any) => {
+    
     console.log(`${currentFormName}'s form`, currentData);
-   
-   
   };
 
   const handleSelectedForm = (e: any) => {
     const select = e.target.value;
     setNeededFormName((pre) => [...pre, select]);
     setGiveForm(givenForm.filter((item) => item !== select));
-    console.log("handleSelectedForm");
+    
   };
   const handleRemoveFromNeededForm = (select: string) => {
     if (select === "product") return;
     setGiveForm((pre) => [...pre, select]);
     setNeededFormName(neededFormName.filter((item) => item !== select));
-    console.log("handleRemoveFromNeededForm");
+    
   };
 
   useEffect(() => {
