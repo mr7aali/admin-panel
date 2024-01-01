@@ -8,6 +8,8 @@ import { printInputInPattern } from "@/js/FormHelpers/printInputInPattern";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { forEachChild } from "typescript";
 import { InputFieldsValidator } from "@/js/FormHelpers/InputFieldsValidator";
+import { getFormLocalStorage, setInLocalStorage } from "@/utils/localStorage";
+import { KEY_productFormData } from "@/constant/storageKey";
 
 const ReusableForm = () => {
   // const NeededformName = ["product"];
@@ -17,20 +19,42 @@ const ReusableForm = () => {
   const [currentFormName, setCurrentFormName] = useState(
     neededFormName[currentForm]
   );
+  const [postData, setPostData] = useState({});
 
   const onSubmit = (currentData: any) => {
-    const fomrInputFields = Specification.product.map((item) => item.name);
+    const fomrInputFields = Specification[currentFormName].map(
+      (item) => item.name
+    );
+   
     const gettingInputFields = Object.keys(currentData);
-
+   
     const data = InputFieldsValidator({
       currentData,
       fomrInputFields,
       gettingInputFields,
     });
+    
    
-    console.log(`${currentFormName}'s form`, data);
+    const allSpecificationData = { ...postData, [currentFormName]: data };
+    setPostData(allSpecificationData);
+    
   };
 
+  const handlePost = async () => {
+    
+    const res = await fetch(
+      "https://star-tech-back-end.vercel.app/api/v1/product/create",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      }
+    );
+    const result = await res.json();
+    console.log(result);
+  };
   const handleSelectedForm = (e: any) => {
     const select = e.target.value;
     setNeededFormName((pre) => [...pre, select]);
@@ -59,77 +83,74 @@ const ReusableForm = () => {
                 {neededFormName[currentForm]?.replace(/_/g, " ")} Form
               </h3>
             </div>
-            <Suspense>
-              <Form submitHandler={onSubmit}>
-                <div className="p-6.5">
-                  <div className="grid grid-cols-12  gap-x-6">
-                    {Specification[neededFormName[currentForm]]?.map(
-                      (Item: any, i: number) => (
-                        <div
-                          key={i}
-                          className={`mb-4.5 ${
-                            printInputInPattern(i + 1)
-                              ? "col-span-6"
-                              : "col-span-4"
-                          }`}
-                        >
-                          <FormInput
-                            label={Item.fieldName}
-                            type={Item.type}
-                            placeholder={`Enter your ${Item.fieldName}`}
-                            name={Item.name}
-                          />
-                        </div>
-                      )
-                    )}
-                  </div>
 
-                  <div className="grid grid-cols-2 gap-6">
+            <Form submitHandler={onSubmit}>
+              <div className="p-6.5">
+                <div className="grid grid-cols-12  gap-x-6">
+                  {Specification[neededFormName[currentForm]]?.map(
+                    (Item: any, i: number) => (
+                      <div
+                        key={i}
+                        className={`mb-4.5 ${
+                          printInputInPattern(i + 1)
+                            ? "col-span-6"
+                            : "col-span-4"
+                        }`}
+                      >
+                        <FormInput
+                          label={Item.fieldName}
+                          type={Item.type}
+                          placeholder={`Enter your ${Item.fieldName}`}
+                          name={Item.name}
+                        />
+                      </div>
+                    )
+                  )}
+                </div>
+
+                <div className="grid grid-cols-2 gap-6">
+                  <button
+                    onClick={() =>
+                      setCurrentForm((pre) => (currentForm === 0 ? 0 : pre - 1))
+                    }
+                    disabled={currentForm === 0}
+                    className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
+                  >
+                    Previous Step
+                  </button>
+                  {!(currentForm === neededFormName.length - 1) ? (
                     <button
                       onClick={() =>
                         setCurrentForm((pre) =>
-                          currentForm === 0 ? 0 : pre - 1
+                          currentForm < neededFormName.length - 1
+                            ? pre + 1
+                            : neededFormName.length - 1
                         )
                       }
-                      disabled={currentForm === 0}
+                      type="submit"
                       className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
                     >
-                      Previous Step
+                      Next Step
                     </button>
-                    {!(currentForm === neededFormName.length - 1) ? (
-                      <button
-                        onClick={() =>
-                          setCurrentForm((pre) =>
-                            currentForm < neededFormName.length - 1
-                              ? pre + 1
-                              : neededFormName.length - 1
-                          )
-                        }
-                        type="submit"
-                        className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
-                      >
-                        Next Step
-                      </button>
-                    ) : (
-                      <button
-                        type="submit"
-                        onClick={() => {
-                          setCurrentForm((pre) =>
-                            currentForm < neededFormName.length - 1
-                              ? pre + 1
-                              : neededFormName.length - 1
-                          );
-                          // handlePost();
-                        }}
-                        className="flex w-full justify-center rounded bg-green p-3 font-medium text-gray"
-                      >
-                        Submit
-                      </button>
-                    )}
-                  </div>
+                  ) : (
+                    <button
+                      type="submit"
+                      onClick={() => {
+                        setCurrentForm((pre) =>
+                          currentForm < neededFormName.length - 1
+                            ? pre + 1
+                            : neededFormName.length - 1
+                        );
+                        handlePost();
+                      }}
+                      className="flex w-full justify-center rounded bg-green p-3 font-medium text-gray"
+                    >
+                      Submit
+                    </button>
+                  )}
                 </div>
-              </Form>
-            </Suspense>
+              </div>
+            </Form>
           </div>
         </div>
         {/*//! { selected form} */}

@@ -2,7 +2,7 @@ export const setInLocalStorage = (key: string, value: object) => {
     if (!key || typeof window === "undefined") {
         return {}
     }
-    localStorage.setItem(key, JSON.stringify(value));
+  return  localStorage.setItem(key, JSON.stringify(value));
 }
 export const getFormLocalStorage = (key: string) => {
     if (!key || typeof window === "undefined") {
