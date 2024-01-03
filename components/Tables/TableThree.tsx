@@ -76,7 +76,7 @@ const TableThree = () => {
                   </p>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                  <div className="flex items-center space-x-3.5">
+                  <div  className="flex items-center space-x-3.5">
                     <button className="hover:text-primary">
                       <svg
                         className="fill-current"
@@ -123,7 +123,7 @@ const TableThree = () => {
                         />
                       </svg>
                     </button>
-                    <button className="hover:text-primary">
+                    <button  className="hover:text-primary">
                       <svg
                         className="fill-current"
                         width="18"

@@ -1,18 +1,16 @@
 "use client";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Breadcrumb from "../Breadcrumbs/Breadcrumb";
 import Form from "@/hookForms/Form";
 import FormInput from "@/hookForms/FormInput";
 import { Specification, formName } from "@/constant/form";
 import { printInputInPattern } from "@/js/FormHelpers/printInputInPattern";
 import { AiTwotoneDelete } from "react-icons/ai";
-import { forEachChild } from "typescript";
+
 import { InputFieldsValidator } from "@/js/FormHelpers/InputFieldsValidator";
-import { getFormLocalStorage, setInLocalStorage } from "@/utils/localStorage";
-import { KEY_productFormData } from "@/constant/storageKey";
 
 const ReusableForm = () => {
-  // const NeededformName = ["product"];
+  
   const [currentForm, setCurrentForm] = useState<number>(0);
   const [givenForm, setGiveForm] = useState(formName);
   const [neededFormName, setNeededFormName] = useState(["product"]);
@@ -25,23 +23,20 @@ const ReusableForm = () => {
     const fomrInputFields = Specification[currentFormName].map(
       (item) => item.name
     );
-   
+
     const gettingInputFields = Object.keys(currentData);
-   
+
     const data = InputFieldsValidator({
       currentData,
       fomrInputFields,
       gettingInputFields,
     });
-    
-   
+
     const allSpecificationData = { ...postData, [currentFormName]: data };
     setPostData(allSpecificationData);
-    
   };
 
   const handlePost = async () => {
-    
     const res = await fetch(
       "https://star-tech-back-end.vercel.app/api/v1/product/create",
       {
