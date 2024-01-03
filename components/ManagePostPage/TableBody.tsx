@@ -1,5 +1,6 @@
 import { IProduct } from "@/types/product";
 import Image from "next/image";
+import Link from "next/link";
 
 
 const TableBody = ({product}:{product:IProduct}) => {
@@ -63,7 +64,10 @@ const TableBody = ({product}:{product:IProduct}) => {
                   />
                 </svg>
               </button>
-              <button className="hover:text-primary">
+
+             
+
+              <Link href={`/post/manage/${product.id}`} className="hover:text-primary">
                 <svg
                   className="fill-current"
                   width="18"
@@ -89,7 +93,9 @@ const TableBody = ({product}:{product:IProduct}) => {
                     fill=""
                   />
                 </svg>
-              </button>
+              </Link>
+
+
               <button className="hover:text-primary">
                 <svg
                   className="fill-current"

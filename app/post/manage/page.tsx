@@ -7,7 +7,8 @@ const ManagePost = async () => {
   const tableHeader = ["Category", "Price", "Sold", "Profit", "Action"];
 
   const res = await fetch(
-    "https://star-tech-back-end.vercel.app/api/v1/product/"
+    "https://star-tech-back-end.vercel.app/api/v1/product/",
+    { cache: "no-store" }
   );
   const data = await res.json();
   const productData: IProduct[] = data.data;
