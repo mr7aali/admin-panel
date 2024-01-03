@@ -24,11 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <div className="dark:bg-boxdark-2 dark:text-bodydark">
+        <div  className="dark:bg-boxdark-2 dark:text-bodydark">
           {loading ? (
             <Loader />
           ) : (
-            <div className="flex h-screen overflow-hidden">
+            <div  className="flex h-screen overflow-hidden">
               {/* <!-- ===== Sidebar Start ===== --> */}
               <Sidebar
                 sidebarOpen={sidebarOpen}
@@ -37,7 +37,7 @@ export default function RootLayout({
               {/* <!-- ===== Sidebar End ===== --> */}
 
               {/* <!-- ===== Content Area Start ===== --> */}
-              <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+              <div  className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
                 {/* <!-- ===== Header Start ===== --> */}
                 <Header
                   sidebarOpen={sidebarOpen}

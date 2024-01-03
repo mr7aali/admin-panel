@@ -63,12 +63,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       }`}
     >
       {/* <!-- SIDEBAR HEADER --> */}
-      <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
+      <div className="flex items-center justify-center gap-2 px-6 py-5.5 lg:py-6.5 border-b-2 ">
         <Link href="/">
           <Image
-            width={176}
+            width={90}
             height={32}
-            src={"/images/logo/logo.svg"}
+            // src={"/images/logo/logo.svg"}
+            src="https://www.startech.com.bd/image/catalog/logo.png"
+            // className="w-[100px]"
             alt="Logo"
           />
         </Link>
@@ -242,8 +244,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       <Link
                         href="#"
                         className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                          (pathname === "/post" ||
-                            pathname.includes("post")) &&
+                          (pathname === "/post" || pathname.includes("post")) &&
                           "bg-graydark dark:bg-meta-4"
                         }`}
                         onClick={(e) => {
