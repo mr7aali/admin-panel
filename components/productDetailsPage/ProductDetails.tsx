@@ -1,13 +1,21 @@
 "use client";
+import Form from "@/hookForms/Form";
+import FormInput from "@/hookForms/FormInput";
 import Image from "next/image";
 import { useState } from "react";
 
 const ProductDetails = ({ data }: { data: any }) => {
   const [editKeyFeature, setEditKeyFeature] = useState(false);
-
-  const keyFeatures = (data.key_features as string).split(";");
+  const [keyFeatures, setkeyFeatures] = useState<string[]>(
+    (data.key_features as string).split(";")
+  );
+  // const keyFeatures = (data.key_features as string).split(";");
   // const { Specification, ...productData } = data;
 
+  const onSubmit = (data: { feature: string }) => {
+    const feature = data.feature;
+    setkeyFeatures((pre) => [...pre, feature]);
+  };
   return (
     <div className="bg-white ">
       <div className="max-w-[1290px] mx-auto flex flex-col justify-center items-center md:items-start md:flex-row sm:pt-10">
@@ -63,22 +71,14 @@ const ProductDetails = ({ data }: { data: any }) => {
                   Key Features
                 </h3>
 
-                {keyFeatures.map((Item: string) => (
+                {keyFeatures.map((Item: string, key: number) => (
                   <p
-                    key={Item}
+                    key={key}
                     className="my-1 text-[15px] sm:text-[16px] font-serif"
                   >
                     {Item}
                   </p>
                 ))}
-
-                {/* <a
-                  onClick={() => setEditKeyFeature(!editKeyFeature)}
-                  className="text-[#e5330b] cursor-pointer mt-[20px] inline-block font-serif relative after:content-[''] after:block after:absolute after:w-full after:h-[2px] after:bg-[#e5330b] after:bottom-[-8px] after:transform after:origin-bottom-right after:scale-x-8 after:hover:scale-x-100"
-                 
-                >
-                  Edit Key Info
-                </a> */}
                 <div className="mt-[20px] flex">
                   <p
                     onClick={() => setEditKeyFeature(!editKeyFeature)}
@@ -95,26 +95,40 @@ const ProductDetails = ({ data }: { data: any }) => {
                   Add Key Features
                 </h3>
 
-                {keyFeatures.map((Item: string) => (
+                {keyFeatures.map((Item: string, key: number) => (
                   <p
-                    key={Item}
+                    key={key}
                     className="my-1 text-[15px] sm:text-[16px] font-serif"
                   >
                     {Item}
                   </p>
                 ))}
 
-                <div className="flex gap-3 mt-[20px] ">
-                  <p className="cursor-pointer py-1 px-5 bo rder-2 rounded-md inline-block text-black-2 uppercase shadow-2">
-                    Add
-                  </p>
-                  <p
-                    onClick={() => setEditKeyFeature(!editKeyFeature)}
-                    className="cursor-pointer py-1 px-5 border-2 rounded-md inline-block bg-success text-white uppercase shadow-3"
-                  >
-                    Done
-                  </p>
-                </div>
+                <Form submitHandler={onSubmit}>
+                  <div className="max-w-70 mt-4">
+                    <FormInput
+                      label=""
+                      name="feature"
+                      placeholder="Type new feature"
+                      type="text"
+                    />
+                  </div>
+
+                  <div className="flex gap-3 mt-[20px] ">
+                    <button
+                      type="submit"
+                      className="cursor-pointer py-1 px-5 bo rder-2 rounded-md inline-block text-black-2 uppercase shadow-2"
+                    >
+                      Add
+                    </button>
+                    <p
+                      onClick={() => setEditKeyFeature(!editKeyFeature)}
+                      className="cursor-pointer py-1 px-5 border-2 rounded-md inline-block bg-success text-white uppercase shadow-3"
+                    >
+                      Done
+                    </p>
+                  </div>
+                </Form>
               </div>
             )}
           </div>
@@ -125,11 +139,3 @@ const ProductDetails = ({ data }: { data: any }) => {
 };
 
 export default ProductDetails;
-
-const key_features = [
-  "Model: iGame GeForce RTX 4060 Ti Ultra W DUO OC 16GB-V",
-  "Core Clock: Base:1830Mhz; Boost:2460Mhz",
-  "Memory Clock: 17Gbps",
-  "Memory Interface: 128bit",
-  "Output: 3x DP+HDMI",
-];
