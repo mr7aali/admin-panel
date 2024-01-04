@@ -1,10 +1,13 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
 
 const ProductDetails = ({ data }: { data: any }) => {
-  console.log(data.key_features);
+  const [editKeyFeature, setEditKeyFeature] = useState(false);
+
   const keyFeatures = (data.key_features as string).split(";");
   // const { Specification, ...productData } = data;
-  
+
   return (
     <div className="bg-white ">
       <div className="max-w-[1290px] mx-auto flex flex-col justify-center items-center md:items-start md:flex-row sm:pt-10">
@@ -54,24 +57,66 @@ const ProductDetails = ({ data }: { data: any }) => {
                 </p>
               </div>
             </aside>
-            <div>
-              <h3 className="text-[18px] text-black font-semibold sm:text-[20px] font-serif my-4">
-                Key Features
-              </h3>
+            {editKeyFeature ? (
+              <div>
+                <h3 className="text-[18px] text-black font-semibold sm:text-[20px] font-serif my-4">
+                  Key Features
+                </h3>
 
-              {keyFeatures.map((Item: string) => (
-                <p
-                  key={Item}
-                  className="my-1 text-[15px] sm:text-[16px] font-serif"
+                {keyFeatures.map((Item: string) => (
+                  <p
+                    key={Item}
+                    className="my-1 text-[15px] sm:text-[16px] font-serif"
+                  >
+                    {Item}
+                  </p>
+                ))}
+
+                {/* <a
+                  onClick={() => setEditKeyFeature(!editKeyFeature)}
+                  className="text-[#e5330b] cursor-pointer mt-[20px] inline-block font-serif relative after:content-[''] after:block after:absolute after:w-full after:h-[2px] after:bg-[#e5330b] after:bottom-[-8px] after:transform after:origin-bottom-right after:scale-x-8 after:hover:scale-x-100"
+                 
                 >
-                  {Item}
-                </p>
-              ))}
+                  Edit Key Info
+                </a> */}
+                <div className="mt-[20px] flex">
+                  <p
+                    onClick={() => setEditKeyFeature(!editKeyFeature)}
+                    className="cursor-pointer py-1 px-5 border-2 rounded-md inline-block bg-success text-white uppercase shadow-3"
+                  >
+                    {" "}
+                    Edit Key Info
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <h3 className="text-[18px] text-black font-semibold sm:text-[20px] font-serif my-4">
+                  Add Key Features
+                </h3>
 
-              <a className="text-[#e5330b] cursor-pointer mt-[10px] font-serif relative after:content-[''] after:block after:absolute after:w-full after:h-[2px] after:bg-[#e5330b] after:bottom-[-8px] after:transform after:origin-bottom-right after:scale-x-8 after:hover:scale-x-100">
-                Edit Key Info
-              </a>
-            </div>
+                {keyFeatures.map((Item: string) => (
+                  <p
+                    key={Item}
+                    className="my-1 text-[15px] sm:text-[16px] font-serif"
+                  >
+                    {Item}
+                  </p>
+                ))}
+
+                <div className="flex gap-3 mt-[20px] ">
+                  <p className="cursor-pointer py-1 px-5 bo rder-2 rounded-md inline-block text-black-2 uppercase shadow-2">
+                    Add
+                  </p>
+                  <p
+                    onClick={() => setEditKeyFeature(!editKeyFeature)}
+                    className="cursor-pointer py-1 px-5 border-2 rounded-md inline-block bg-success text-white uppercase shadow-3"
+                  >
+                    Done
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
