@@ -24,6 +24,9 @@ const FormInput = ({
     control,
     formState: { errors },
   } = useFormContext();
+
+  const InputClassName =
+    "w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary";
   return (
     <>
       <label className="mb-2.5 block text-black dark:text-white">
@@ -40,14 +43,24 @@ const FormInput = ({
         }}
         name={name}
         render={({ field }) => (
-          <input
-            {...field}
-            value={value ? value : field.value || ""}
-            type={type || "text"}
-            placeholder={placeholder}
-            // style={{border:"1px solid red"}}
-            className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-          />
+          <>
+            {type === "text" ? (
+              <input
+                {...field}
+                value={value ? value : field.value || ""}
+                type={type || "text"}
+                placeholder={placeholder}
+                // style={{border:"1px solid red"}}
+                className={InputClassName}
+              />
+            ) : (
+              <select className={InputClassName}>sf
+                <option value="">Option 1</option>
+                <option value="">Option 10</option>
+                <option value="">Option 30</option>
+              </select>
+            )}
+          </>
         )}
       />
       {errors[name] && (

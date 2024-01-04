@@ -12,6 +12,7 @@ const ManagePost = async () => {
   );
   const data = await res.json();
   const productData: IProduct[] = data.data;
+  console.log(productData)
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <ManagePostTitle title="All Products" />

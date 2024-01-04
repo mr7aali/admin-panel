@@ -24,8 +24,8 @@ const ProductDetailsPage = async ({
       <section>
         <ProductDetails data={data.data} />
       </section>
-
-      <section className=" max-w-[1290px] mx-auto mt-5 grid grid-cols-12 gap-5 px-3">
+      {/* max-w-[1290px] */}
+      <section className="  mx-auto mt-5 grid grid-cols-12 gap-5 px-3">
         {/* left */}
         <div className="col-span-12 lg:col-span-9 ">
           <div className="sm:flex justify-center sm:justify-start sm:items-center">
@@ -57,18 +57,7 @@ const ProductDetailsPage = async ({
         </div>
 
         {/* Right */}
-        <div className="hidden lg:block h-auto col-span-3 rounded-md ">
-          {/* 
-                    <div className="bg-white px-5" style={{ boxShadow: "0 1px 1px rgba(0,0,0,.1)" }}>
-                        <h2 className="text-[#3749bb] font-bold text-center  py-4 text-[15px] xl:text-[17px]">Related Product</h2>
-                        <RelatedProductCard />
-                    </div>
-
-                    <div className="bg-white mt-5 px-5" style={{ boxShadow: "0 1px 1px rgba(0,0,0,.1)" }}>
-                        <h2 className="text-[#3749bb] font-bold text-center  py-4 text-[15px] xl:text-[17px]">Recently Viewed</h2>
-                        <RelatedProductCard />
-                    </div> */}
-        </div>
+        <div className="hidden lg:block h-auto col-span-3 rounded-md "></div>
       </section>
     </>
   );

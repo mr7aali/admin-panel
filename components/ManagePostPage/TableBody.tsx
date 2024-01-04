@@ -42,10 +42,10 @@ const TableBody = ({product}:{product:IProduct}) => {
         <div className=" flex items-center justify-center">
           <p className="text-sm text-meta-3">${product.price}</p>
         </div>
-        <div className="flex items-center justify-center">
+        <div  className="flex items-center justify-center">
           <div className=" py-5 px-4 dark:border-strokedark">
             <div className="flex items-center space-x-3.5">
-              <button className="hover:text-primary">
+              <Link href={`/post/manage/${product.id}`} className="hover:text-primary">
                 <svg
                   className="fill-current"
                   width="18"
@@ -63,7 +63,7 @@ const TableBody = ({product}:{product:IProduct}) => {
                     fill=""
                   />
                 </svg>
-              </button>
+              </Link>
 
              
 
@@ -96,7 +96,7 @@ const TableBody = ({product}:{product:IProduct}) => {
               </Link>
 
 
-              <button className="hover:text-primary">
+              {/* <button className="hover:text-primary">
                 <svg
                   className="fill-current"
                   width="18"
@@ -114,7 +114,7 @@ const TableBody = ({product}:{product:IProduct}) => {
                     fill=""
                   />
                 </svg>
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
