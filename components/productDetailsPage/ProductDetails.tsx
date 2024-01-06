@@ -1,6 +1,7 @@
 "use client";
 import Form from "@/hookForms/Form";
 import FormInput from "@/hookForms/FormInput";
+import { IResponseType } from "@/types/response";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -9,12 +10,33 @@ const ProductDetails = ({ data }: { data: any }) => {
   const [keyFeatures, setkeyFeatures] = useState<string[]>(
     (data.key_features as string).split(";")
   );
-  // const keyFeatures = (data.key_features as string).split(";");
-  // const { Specification, ...productData } = data;
+
+  
 
   const onSubmit = (data: { feature: string }) => {
     const feature = data.feature;
     setkeyFeatures((pre) => [...pre, feature]);
+  };
+
+  const patchKeyFeatures = async () => {
+    const productData = {
+      product: { id: data.id, key_features: keyFeatures.join(";") },
+    };
+
+    const res = await fetch(
+      "https://star-tech-back-end.vercel.app/api/v1/product/",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productData),
+      }
+    );
+    const result: IResponseType = await res.json();
+    if (result.success === true) {
+      setEditKeyFeature(!editKeyFeature);
+    }
   };
   return (
     <div className="bg-white ">
@@ -76,7 +98,7 @@ const ProductDetails = ({ data }: { data: any }) => {
                     key={key}
                     className="my-1 text-[15px] sm:text-[16px] font-serif"
                   >
-                    {Item}
+                    <span>{Item}</span>
                   </p>
                 ))}
                 <div className="mt-[20px] flex">
@@ -101,6 +123,16 @@ const ProductDetails = ({ data }: { data: any }) => {
                     className="my-1 text-[15px] sm:text-[16px] font-serif"
                   >
                     {Item}
+                    <span
+                      onClick={() =>
+                        setkeyFeatures((pre) =>
+                          pre.filter((key) => key !== Item)
+                        )
+                      }
+                      className="p-1 cursor-pointer font-bold text-red"
+                    >
+                      X
+                    </span>
                   </p>
                 ))}
 
@@ -121,12 +153,13 @@ const ProductDetails = ({ data }: { data: any }) => {
                     >
                       Add
                     </button>
-                    <p
-                      onClick={() => setEditKeyFeature(!editKeyFeature)}
+                    <button
+                      type="submit"
+                      onClick={() => patchKeyFeatures()}
                       className="cursor-pointer py-1 px-5 border-2 rounded-md inline-block bg-success text-white uppercase shadow-3"
                     >
                       Done
-                    </p>
+                    </button>
                   </div>
                 </Form>
               </div>

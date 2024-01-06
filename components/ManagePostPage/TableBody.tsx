@@ -6,6 +6,7 @@ import Link from "next/link";
 const TableBody = ({product}:{product:IProduct}) => {
     return (
         <div
+      
         className="grid grid-cols-12 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5"
       
       >
