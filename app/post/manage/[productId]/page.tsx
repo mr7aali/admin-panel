@@ -3,6 +3,7 @@
 import ProductDetails from "@/components/productDetailsPage/ProductDetails";
 import SingleFeatures from "@/components/productDetailsPage/SingleFeatures";
 import { convertSpecificationData } from "@/js/convertSpecificationData";
+import { IProduct } from "@/types/product";
 
 const ProductDetailsPage = async ({
   params,
@@ -16,13 +17,15 @@ const ProductDetailsPage = async ({
     }
   );
   const data = await res?.json();
-  console.log(data.data);
-  const specificationData = convertSpecificationData(data.data?.Specification);
-// console.log(specificationData);
+
+  const { Specification, ...others } = data.data;
+  const productData = others as IProduct;
+  const specificationData = convertSpecificationData(Specification);
+
   return (
     <>
       <section>
-        <ProductDetails data={data.data} />
+        <ProductDetails data={productData} />
       </section>
       {/* max-w-[1290px] */}
       <section className="  mx-auto mt-5 grid grid-cols-12 gap-5 px-3">

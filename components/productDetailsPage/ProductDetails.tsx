@@ -11,8 +11,6 @@ const ProductDetails = ({ data }: { data: any }) => {
     (data.key_features as string).split(";")
   );
 
-  
-
   const onSubmit = (data: { feature: string }) => {
     const feature = data.feature;
     setkeyFeatures((pre) => [...pre, feature]);
