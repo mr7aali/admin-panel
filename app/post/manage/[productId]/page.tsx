@@ -53,9 +53,15 @@ const ProductDetailsPage = async ({
 
           <div className="bg-white rounded-md  mt-5 px-3 sm:px-5">
             <h2 className="font-semibold text-[20px] py-5">Specification</h2>
-            {specificationData?.map((specification, index) => (
-              <SingleFeatures key={index} data={specification} />
-            ))}
+
+            {Object.entries(Specification).map(
+              ([specificationName, specification]) => (
+                <SingleFeatures
+                  key={specificationName}
+                  data={{ specificationName, specification: specification as object }}
+                />
+              )
+            )}
           </div>
         </div>
 
