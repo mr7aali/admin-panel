@@ -2,6 +2,7 @@
 
 import ProductDetails from "@/components/productDetailsPage/ProductDetails";
 import SingleFeatures from "@/components/productDetailsPage/SingleFeatures";
+import FormModal from "@/components/sheared/FormModal";
 import { convertSpecificationData } from "@/js/convertSpecificationData";
 import { IProduct } from "@/types/product";
 
@@ -24,11 +25,10 @@ const ProductDetailsPage = async ({
 
   return (
     <>
-      <section>
-        <ProductDetails data={productData} />
-      </section>
+      <ProductDetails data={productData} />
+
       {/* max-w-[1290px] */}
-      <section className="  mx-auto mt-5 grid grid-cols-12 gap-5 px-3">
+      <div className="  mx-auto mt-5 grid grid-cols-12 gap-5 px-3">
         {/* left */}
         <div className="col-span-12 lg:col-span-9 ">
           <div className="sm:flex justify-center sm:justify-start sm:items-center">
@@ -58,7 +58,10 @@ const ProductDetailsPage = async ({
               ([specificationName, specification]) => (
                 <SingleFeatures
                   key={specificationName}
-                  data={{ specificationName, specification: specification as object }}
+                  data={{
+                    specificationName,
+                    specification: specification as object,
+                  }}
                 />
               )
             )}
@@ -67,7 +70,14 @@ const ProductDetailsPage = async ({
 
         {/* Right */}
         <div className="hidden lg:block h-auto col-span-3 rounded-md "></div>
-      </section>
+      </div>
+     
+      {/* <div className="fixed top-0 left-0 w-full h-full grid place-items-center backdrop-blur">
+       
+        <div className="w-2/6 mx-auto">
+          <FormModal />
+        </div>
+      </div> */}
     </>
   );
 };
