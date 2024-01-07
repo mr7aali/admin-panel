@@ -9,7 +9,7 @@ type IInput = {
   value?: string;
   placeholder?: string;
   validation?: object;
-  label?: string;
+  label: string;
 };
 const FormInput = ({
   id,

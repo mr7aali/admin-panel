@@ -178,8 +178,12 @@ const ProductDetails = ({ data }: { data: any }) => {
           </div>
         </div>
       </div>
-      {/* <!-- Modal content goes here --> */}
-      {modelOpen && <FormModal setModelOpen={setModelOpen}/>}
+
+      <FormModal
+        data={data}
+        modelOpen={modelOpen}
+        setModelOpen={setModelOpen}
+      />
     </>
   );
 };

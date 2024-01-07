@@ -21,7 +21,7 @@ const ProductDetailsPage = async ({
 
   const { Specification, ...others } = data.data;
   const productData = others as IProduct;
-  const specificationData = convertSpecificationData(Specification);
+  // const specificationData = convertSpecificationData(Specification);
 
   return (
     <>
@@ -72,12 +72,7 @@ const ProductDetailsPage = async ({
         <div className="hidden lg:block h-auto col-span-3 rounded-md "></div>
       </div>
      
-      {/* <div className="fixed top-0 left-0 w-full h-full grid place-items-center backdrop-blur">
-       
-        <div className="w-2/6 mx-auto">
-          <FormModal />
-        </div>
-      </div> */}
+     
     </>
   );
 };
