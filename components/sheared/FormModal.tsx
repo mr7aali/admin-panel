@@ -5,17 +5,17 @@ import { FaDeleteLeft } from "react-icons/fa6";
 import FormCom from "./FormCom";
 
 const FormModal = ({
+  tableName,
   data,
   modelOpen,
   setModelOpen,
 }: {
+  tableName:string;
   data: any;
   modelOpen: boolean;
   setModelOpen: (isOpen: boolean) => void;
 }) => {
-  // const { id, ...productData } = data;
-
-  // console.log(data, productData);
+ 
 
   return (
     <div
@@ -37,7 +37,7 @@ const FormModal = ({
             </h3>
           </div>
 
-          <FormCom data={data} setModelOpen={setModelOpen} />
+          <FormCom tableName={tableName} data={data} setModelOpen={setModelOpen} />
         </div>
       </div>
     </div>

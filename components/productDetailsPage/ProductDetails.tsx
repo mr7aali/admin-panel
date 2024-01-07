@@ -7,7 +7,13 @@ import { useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import FormModal from "../sheared/FormModal";
 
-const ProductDetails = ({ data }: { data: any }) => {
+const ProductDetails = ({
+  data,
+  tableName,
+}: {
+  data: any;
+  tableName: string;
+}) => {
   const [editKeyFeature, setEditKeyFeature] = useState(false);
   const [keyFeatures, setkeyFeatures] = useState<string[]>(
     (data.key_features as string).split(";")
@@ -180,6 +186,7 @@ const ProductDetails = ({ data }: { data: any }) => {
       </div>
 
       <FormModal
+        tableName={tableName}
         data={data}
         modelOpen={modelOpen}
         setModelOpen={setModelOpen}

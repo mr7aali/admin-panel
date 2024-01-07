@@ -4,22 +4,24 @@ import { IProduct } from "@/types/product";
 import { IResponseType } from "@/types/response";
 import { AxiosService } from "@/utils/Axios";
 const FormCom = ({
+  tableName,
   data,
   setModelOpen,
 }: {
+  tableName: string;
   data: IProduct;
   setModelOpen: (isOpen: boolean) => void;
 }) => {
-  const { id, ...productData } = data;
+  const { id, ...tableData } = data;
 
   const onSubmit = async (data: any) => {
     const postProductData = {
-      product: {
+      [tableName]: {
         id: id,
         ...data,
       },
     };
-    console.log(productData);
+
     const res = await AxiosService.patch("/api/v1/product", postProductData);
     const result: IResponseType = await res.data;
 
@@ -28,17 +30,21 @@ const FormCom = ({
     }
   };
   return (
-    <Form submitHandler={onSubmit} defaultValues={productData}>
+    <Form submitHandler={onSubmit} defaultValues={tableData}>
       <div className="p-6.5">
         <div className="grid grid-cols-2 gap-4">
-          {Object.entries(productData).map(([fieldName, fieldValue]) => (
+          {Object.entries(tableData).map(([fieldName, fieldValue]) => (
             <div key={fieldName} className="mb-4.5">
-              <FormInput
-                label={fieldName}
-                name={fieldName}
-                type="text"
-                placeholder={`Enter ${fieldName}`}
-              />
+              {!(fieldName === "specification_id") ? (
+                <FormInput
+                  label={fieldName}
+                  name={fieldName}
+                  type="text"
+                  placeholder={`Enter ${fieldName}`}
+                />
+              ) : (
+                <></>
+              )}
             </div>
           ))}
         </div>

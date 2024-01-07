@@ -21,11 +21,11 @@ const ProductDetailsPage = async ({
 
   const { Specification, ...others } = data.data;
   const productData = others as IProduct;
-  // const specificationData = convertSpecificationData(Specification);
 
+  
   return (
     <>
-      <ProductDetails data={productData} />
+      <ProductDetails data={productData} tableName={"product"}/>
 
       {/* max-w-[1290px] */}
       <div className="  mx-auto mt-5 grid grid-cols-12 gap-5 px-3">
@@ -71,8 +71,6 @@ const ProductDetailsPage = async ({
         {/* Right */}
         <div className="hidden lg:block h-auto col-span-3 rounded-md "></div>
       </div>
-     
-     
     </>
   );
 };
