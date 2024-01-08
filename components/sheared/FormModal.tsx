@@ -10,20 +10,18 @@ const FormModal = ({
   modelOpen,
   setModelOpen,
 }: {
-  tableName:string;
+  tableName: string;
   data: any;
   modelOpen: boolean;
   setModelOpen: (isOpen: boolean) => void;
 }) => {
- 
-
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-full grid place-items-center backdrop-blur transition-opacity duration-300 ${
+      className={`fixed z-9999  top-0 left-0 w-full h-full grid place-items-center backdrop-blur transition-opacity duration-300 ${
         modelOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
-      <div className="w-2/6 mx-auto ">
+      <div className="w-full p-5 md:w-1/2 xl:w-2/6 mx-auto ">
         <div className="rounded-sm border  border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
           <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
             <h3 className="font-medium text-black dark:text-white flex items-center justify-between">
@@ -37,7 +35,11 @@ const FormModal = ({
             </h3>
           </div>
 
-          <FormCom tableName={tableName} data={data} setModelOpen={setModelOpen} />
+          <FormCom
+            tableName={tableName}
+            data={data}
+            setModelOpen={setModelOpen}
+          />
         </div>
       </div>
     </div>
