@@ -1,8 +1,10 @@
+"use client";
 import Form from "@/hookForms/Form";
 import FormInput from "@/hookForms/FormInput";
 import { IProduct } from "@/types/product";
 import { IResponseType } from "@/types/response";
 import { AxiosService } from "@/utils/Axios";
+import { useState } from "react";
 const FormCom = ({
   tableName,
   data,
@@ -13,24 +15,26 @@ const FormCom = ({
   setModelOpen: (isOpen: boolean) => void;
 }) => {
   const { id, ...tableData } = data;
+  const [defaultValues, setDefaultValues] = useState(tableData);
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (fromdata: any) => {
+    setDefaultValues(fromdata);
     const postProductData = {
       [tableName]: {
         id: id,
-        ...data,
+        ...fromdata,
       },
     };
-
     const res = await AxiosService.patch("/api/v1/product", postProductData);
+    console.log(res);
     const result: IResponseType = await res.data;
-
     if (result.success) {
       setModelOpen(false);
     }
   };
+
   return (
-    <Form submitHandler={onSubmit} defaultValues={tableData}>
+    <Form submitHandler={onSubmit} defaultValues={defaultValues}>
       <div className="p-6.5">
         <div className="grid grid-cols-2 gap-4">
           {Object.entries(tableData).map(([fieldName, fieldValue]) => (

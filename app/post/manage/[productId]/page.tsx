@@ -2,8 +2,6 @@
 
 import ProductDetails from "@/components/productDetailsPage/ProductDetails";
 import SingleFeatures from "@/components/productDetailsPage/SingleFeatures";
-import FormModal from "@/components/sheared/FormModal";
-import { convertSpecificationData } from "@/js/convertSpecificationData";
 import { IProduct } from "@/types/product";
 
 const ProductDetailsPage = async ({
@@ -55,9 +53,9 @@ const ProductDetailsPage = async ({
             <h2 className="font-semibold text-[20px] py-5">Specification</h2>
 
             {Object.entries(Specification).map(
-              ([specificationName, specification]) => (
+              ([specificationName, specification],key:number) => (
                 <SingleFeatures
-                  key={specificationName}
+                  key={key}
                   data={{
                     specificationName,
                     specification: specification as object,

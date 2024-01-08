@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import FormModal from "../sheared/FormModal";
+import { AxiosService } from "@/utils/Axios";
 
 const ProductDetails = ({
   data,
@@ -30,17 +31,20 @@ const ProductDetails = ({
       product: { id: data.id, key_features: keyFeatures.join(";") },
     };
 
-    const res = await fetch(
-      "https://star-tech-back-end.vercel.app/api/v1/product/",
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(productData),
-      }
-    );
-    const result: IResponseType = await res.json();
+    const res = await AxiosService.patch("/api/v1/product/", productData);
+    const result: IResponseType = await res.data;
+    // const res = await fetch(
+    //   "https://star-tech-back-end.vercel.app/api/v1/product/",
+    //   {
+    //     method: "PATCH",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(productData),
+    //   }
+    // );
+    // const result: IResponseType = await res.json();
+
     if (result.success === true) {
       setEditKeyFeature(!editKeyFeature);
     }
@@ -169,13 +173,13 @@ const ProductDetails = ({
                       >
                         Add
                       </button>
-                      <button
-                        type="submit"
+                      <span
+                        // type="submit"
                         onClick={() => patchKeyFeatures()}
                         className="cursor-pointer py-1 px-5 border-2 rounded-md inline-block bg-success text-white uppercase shadow-3"
                       >
                         Done
-                      </button>
+                      </span>
                     </div>
                   </Form>
                 </div>

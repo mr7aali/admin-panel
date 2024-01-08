@@ -23,10 +23,10 @@ const SingleFeatures = ({
         </h3>
 
         {Object.entries(data.specification as any).map(
-          ([featureName, feature]) =>
+          ([featureName, feature],key:number) =>
             !(featureName === "specification_id" || featureName === "id") ? (
               <p
-                key={featureName}
+                key={key}
                 className="grid grid-cols-3 px-3 py-2"
                 style={{ borderBottom: "1px solid #ecedef" }}
               >
