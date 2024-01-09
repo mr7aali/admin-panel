@@ -44,7 +44,7 @@ const ProductDetails = ({
     //   }
     // );
     // const result: IResponseType = await res.json();
-
+    console.log(res);
     if (result.success === true) {
       setEditKeyFeature(!editKeyFeature);
     }

@@ -9,6 +9,7 @@ const SingleFeatures = ({
   data: { specificationName: string; specification: object };
 }) => {
   const [modelOpen, setModelOpen] = useState<boolean>(false);
+
   return (
     <>
       <div className="pb-5">
@@ -23,7 +24,7 @@ const SingleFeatures = ({
         </h3>
 
         {Object.entries(data.specification as any).map(
-          ([featureName, feature],key:number) =>
+          ([featureName, feature], key: number) =>
             !(featureName === "specification_id" || featureName === "id") ? (
               <p
                 key={key}
@@ -38,7 +39,7 @@ const SingleFeatures = ({
                 </span>
               </p>
             ) : (
-              <></>
+              <div key={key}></div>
             )
         )}
       </div>

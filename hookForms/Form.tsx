@@ -21,7 +21,7 @@ const Form = ({ children, submitHandler, defaultValues }: IFormProps) => {
 
   const onSubmit = (data: any) => {
     submitHandler(data);
-    methods.reset();
+    // methods.reset();
   };
 
   return (

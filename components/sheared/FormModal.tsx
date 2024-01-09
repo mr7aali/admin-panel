@@ -3,6 +3,7 @@
 import React from "react";
 import { FaDeleteLeft } from "react-icons/fa6";
 import FormCom from "./FormCom";
+import { formatStringForSpecification } from "../productDetailsPage/SingleFeatures";
 
 const FormModal = ({
   tableName,
@@ -25,7 +26,9 @@ const FormModal = ({
         <div className="rounded-sm border  border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
           <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
             <h3 className="font-medium text-black dark:text-white flex items-center justify-between">
-              <span>Sign Up Form</span>
+              
+            
+              {formatStringForSpecification(tableName)}
               <span
                 onClick={() => setModelOpen(false)}
                 className="p-1 text-2xl cursor-pointer text-red"

@@ -56,6 +56,7 @@ const ProductDetailsPage = async ({
               ([specificationName, specification],key:number) => (
                 <SingleFeatures
                   key={key}
+                 
                   data={{
                     specificationName,
                     specification: specification as object,
@@ -63,6 +64,9 @@ const ProductDetailsPage = async ({
                 />
               )
             )}
+
+
+
           </div>
         </div>
 
