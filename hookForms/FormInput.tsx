@@ -58,10 +58,10 @@ const FormInput = ({
               />
             ) : (
               <select className={InputClassName}>
-                sf
-                <option value="">Option 1</option>
-                <option value="">Option 10</option>
-                <option value="">Option 30</option>
+                <option value="">--Please choose an option--</option>
+                <option value="2">Option 1</option>
+                <option value="3">Option 10</option>
+                <option value="4">Option 30</option>
               </select>
             )}
           </>

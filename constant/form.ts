@@ -12,6 +12,7 @@ export const Specification: ISpecification = {
         { fieldName: "Product Code", name: "product_code", type: "text" },
         { fieldName: "Brand", name: "brand", type: "text" },
         { fieldName: "Key Features", name: "key_features", type: "text" },
+        { fieldName: "Category", name: "category_id", type: "select" },
         { fieldName: "Image", name: "image", type: "text" },
         { fieldName: "Warranty", name: "warranty", type: "text" },
     ],

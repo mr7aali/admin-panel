@@ -78,10 +78,9 @@ const ReusableForm = () => {
                 {neededFormName[currentForm]?.replace(/_/g, " ")} Form
               </h3>
             </div>
-
             <Form submitHandler={onSubmit}>
               <div className="p-6.5">
-                <div className="grid grid-cols-12  gap-x-6">
+                <div  className="grid grid-cols-12  gap-x-6">
                   {Specification[neededFormName[currentForm]]?.map(
                     (Item: any, i: number) => (
                       <div
