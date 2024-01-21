@@ -1,8 +1,37 @@
 // import { ISpecification } from "@/types/Specification";
 
+import { ICategory } from "@/types/product";
+import { IResponseType } from "@/types/response";
+
 interface ISpecification {
     [key: string]: Array<{ fieldName: string; name: string; type: string }>;
 }
+
+
+
+
+
+
+
+
+
+ const apiUrl = 'https://star-tech-back-end.vercel.app/api/v1/category/';
+fetch(apiUrl)
+  .then((response: Response) => {
+    if (!response.ok) {
+      throw new Error(`Network response was not ok, status code: ${response.status}`);
+    }
+    return response.json() as Promise<IResponseType<ICategory[]>>;
+  })
+  .then((data: IResponseType<ICategory[]>) => {
+    console.log(data);
+  })
+  .catch((error: Error) => {
+    console.error('Fetch error:', error.message);
+  });
+
+
+
 
 export const Specification: ISpecification = {
     product: [

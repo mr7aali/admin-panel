@@ -17,3 +17,9 @@ export type IProduct = {
   image: string;
   warranty: string;
 }
+
+export type ICategory ={
+  id:number;
+  name:string;
+  Image:string;
+}

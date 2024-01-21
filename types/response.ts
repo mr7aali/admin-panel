@@ -1,5 +1,6 @@
-export type IResponseType = {
+export type IResponseType<T> = {
     success: boolean,
     statusCode: number,
-    message: string
+    message: string,
+    data?: T;
 }
