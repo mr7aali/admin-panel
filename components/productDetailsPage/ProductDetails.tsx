@@ -1,12 +1,13 @@
 "use client";
 import Form from "@/hookForms/Form";
 import FormInput from "@/hookForms/FormInput";
-import { IResponseType } from "@/types/response";
+
 import Image from "next/image";
 import { useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import FormModal from "../sheared/FormModal";
 import { AxiosService } from "@/utils/Axios";
+import { IResponseType } from "@/types/response";
 
 const ProductDetails = ({
   data,
@@ -32,7 +33,7 @@ const ProductDetails = ({
     };
 
     const res = await AxiosService.patch("/api/v1/product/", productData);
-    const result: IResponseType = await res.data;
+    const result: IResponseType<any> = await res.data;
     // const res = await fetch(
     //   "https://star-tech-back-end.vercel.app/api/v1/product/",
     //   {

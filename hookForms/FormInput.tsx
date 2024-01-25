@@ -1,7 +1,5 @@
 "use client";
-
 import { Controller, useFormContext } from "react-hook-form";
-
 type IInput = {
   type: string;
   name: string;
@@ -10,6 +8,7 @@ type IInput = {
   placeholder?: string;
   validation?: object;
   label: string;
+  selectOption?: { [key: string]: any }[];
 };
 const FormInput = ({
   id,
@@ -19,6 +18,7 @@ const FormInput = ({
   validation,
   value,
   label,
+  selectOption,
 }: IInput) => {
   const {
     control,
@@ -58,10 +58,18 @@ const FormInput = ({
               />
             ) : (
               <select className={InputClassName}>
-                <option value="">--Please choose an option--</option>
-                <option value="2">Option 1</option>
-                <option value="3">Option 10</option>
-                <option value="4">Option 30</option>
+                <option value="" className="text-center">
+                  --Please choose an option--
+                </option>
+                {selectOption?.map((option) => (
+                  <option
+                    key={option.id}
+                    value={option.id}
+                    className="text-center"
+                  >
+                    {option.name}
+                  </option>
+                ))}
               </select>
             )}
           </>

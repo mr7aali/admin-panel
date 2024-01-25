@@ -3,14 +3,13 @@ import React, { useEffect, useState } from "react";
 import Breadcrumb from "../Breadcrumbs/Breadcrumb";
 import Form from "@/hookForms/Form";
 import FormInput from "@/hookForms/FormInput";
-import { Specification, formName } from "@/constant/form";
+import { formName, getSpecification } from "@/constant/form";
 import { printInputInPattern } from "@/js/FormHelpers/printInputInPattern";
 import { AiTwotoneDelete } from "react-icons/ai";
-
 import { InputFieldsValidator } from "@/js/FormHelpers/InputFieldsValidator";
+import { ISpecification } from "@/types/Specification";
 
-const ReusableForm = () => {
-  
+const ReusableForm = ({ Specification }: { Specification: ISpecification }) => {
   const [currentForm, setCurrentForm] = useState<number>(0);
   const [givenForm, setGiveForm] = useState(formName);
   const [neededFormName, setNeededFormName] = useState(["product"]);
@@ -32,8 +31,8 @@ const ReusableForm = () => {
       gettingInputFields,
     });
 
-    const allSpecificationData = { ...postData, [currentFormName]: data };
-    setPostData(allSpecificationData);
+    const allgetSpecificationData = { ...postData, [currentFormName]: data };
+    setPostData(allgetSpecificationData);
   };
 
   const handlePost = async () => {
@@ -80,7 +79,7 @@ const ReusableForm = () => {
             </div>
             <Form submitHandler={onSubmit}>
               <div className="p-6.5">
-                <div  className="grid grid-cols-12  gap-x-6">
+                <div className="grid grid-cols-12  gap-x-6">
                   {Specification[neededFormName[currentForm]]?.map(
                     (Item: any, i: number) => (
                       <div
@@ -96,6 +95,7 @@ const ReusableForm = () => {
                           type={Item.type}
                           placeholder={`Enter your ${Item.fieldName}`}
                           name={Item.name}
+                          selectOption={Item?.option}
                         />
                       </div>
                     )
