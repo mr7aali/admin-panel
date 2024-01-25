@@ -26,7 +26,7 @@ const FormCom = ({
       },
     };
     const res = await AxiosService.patch("/api/v1/product", postProductData);
-    console.log(res);
+  
     const result: IResponseType<any> = await res.data;
     if (result.success) {
       setModelOpen(false);

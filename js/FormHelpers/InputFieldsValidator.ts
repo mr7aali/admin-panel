@@ -7,7 +7,7 @@ export const InputFieldsValidator = ({ fomrInputFields, gettingInputFields, curr
     for (const fomrInputField of fomrInputFields) {
         for (const gettingInputField of gettingInputFields) {
             if (fomrInputField === gettingInputField) {
-                // console.log("allValidInputFilds", fomrInputField);
+              
                 if (!currentData[fomrInputField]) {
                    continue
                 }

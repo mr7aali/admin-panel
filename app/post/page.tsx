@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const PostPage = async () => {
   const Specification = (await getSpecification()) 
-  console.log(Specification);
+ 
   return (
     <div>
       <ReusableForm Specification={Specification} />

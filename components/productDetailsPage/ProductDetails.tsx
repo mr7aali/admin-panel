@@ -34,18 +34,7 @@ const ProductDetails = ({
 
     const res = await AxiosService.patch("/api/v1/product/", productData);
     const result: IResponseType<any> = await res.data;
-    // const res = await fetch(
-    //   "https://star-tech-back-end.vercel.app/api/v1/product/",
-    //   {
-    //     method: "PATCH",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(productData),
-    //   }
-    // );
-    // const result: IResponseType = await res.json();
-    console.log(res);
+    
     if (result.success === true) {
       setEditKeyFeature(!editKeyFeature);
     }

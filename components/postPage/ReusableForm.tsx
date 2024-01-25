@@ -46,8 +46,8 @@ const ReusableForm = ({ Specification }: { Specification: ISpecification }) => {
         body: JSON.stringify(postData),
       }
     );
-    const result = await res.json();
-    console.log(result);
+    
+ 
   };
   const handleSelectedForm = (e: any) => {
     const select = e.target.value;
