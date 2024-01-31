@@ -325,6 +325,16 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               Manage post
                             </Link>
                           </li>
+                          <li>
+                            <Link
+                              href="/post/category"
+                              className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
+                                pathname === "/post/category" && "text-white"
+                              } `}
+                            >
+                              Category
+                            </Link>
+                          </li>
                         </ul>
                       </div>
                       {/* <!-- Dropdown Menu End --> */}
