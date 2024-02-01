@@ -16,6 +16,8 @@ const CategoryTableBody = ({ product }: { product: IProduct }) => {
             />
           </div>
           {/* <p className="text-sm text-black dark:text-white">{product.name}</p> */}
+
+          
         </div>
       </div>
       <div className=" hidden items-center sm:flex justify-center">
