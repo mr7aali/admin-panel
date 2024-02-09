@@ -4,10 +4,10 @@ import Link from "next/link";
 
 const CategoryTableBody = ({ product }: { product: IProduct }) => {
   return (
-    <div className="grid grid-cols-12 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5">
-      <div className="col-span-3 flex items-center ">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-          <div className="h-12.5 w-15 rounded-md">
+    <div className="grid  grid-cols-12 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5 ">
+      <div className="col-span-4 flex items-center ">
+        <div className="flex flex-col gap-4 sm:flex-row ">
+          <div className="h-12.5 w-15 rounded-md flex">
             <Image
               src={"/images/product/product-01.png"}
               width={60}
@@ -15,17 +15,17 @@ const CategoryTableBody = ({ product }: { product: IProduct }) => {
               alt="Product"
             />
           </div>
-          {/* <p className="text-sm text-black dark:text-white">{product.name}</p> */}
-
-          
+          <div>
+            <p className="text-[16px] text-black dark:text-white">{product.name}</p>
+            <p className="text-sm text-black dark:text-white">10 Feb 2024</p>
+          </div>
         </div>
       </div>
-      <div className=" hidden items-center sm:flex justify-center">
-        <p className="text-sm text-black dark:text-white">{product.brand}</p>
-      </div>
+
       <div className=" flex items-center justify-center">
         <p className="text-sm text-black dark:text-white">${product.price}</p>
       </div>
+
       <div className=" flex items-center justify-center">
         <p className="text-sm text-black dark:text-white">{product.status}</p>
       </div>
