@@ -29,7 +29,7 @@ const ManagePost = async () => {
         ))}
       </div>
 
-      {productData.map((product, key: number) => (
+      {productData?.map((product, key: number) => (
         <CategoryTableBody key={key} product={product} />
       ))}
     </div>

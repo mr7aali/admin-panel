@@ -17,25 +17,10 @@ const ReusableForm = ({ Specification }: { Specification: ISpecification }) => {
     neededFormName[currentForm]
   );
   const [postData, setPostData] = useState({});
+  console.log(postData);
 
-  const onSubmit = (currentData: any) => {
-    const fomrInputFields = Specification[currentFormName].map(
-      (item) => item.name
-    );
-
-    const gettingInputFields = Object.keys(currentData);
-
-    const data = InputFieldsValidator({
-      currentData,
-      fomrInputFields,
-      gettingInputFields,
-    });
-
-    const allgetSpecificationData = { ...postData, [currentFormName]: data };
-    setPostData(allgetSpecificationData);
-  };
-
-  const handlePost = async () => {
+  const onSubmit = async (currentData: any) => {
+    console.log(currentData);
     const res = await fetch(
       "https://star-tech-back-end.vercel.app/api/v1/product/create",
       {
@@ -43,12 +28,18 @@ const ReusableForm = ({ Specification }: { Specification: ISpecification }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(postData),
+        body: JSON.stringify({
+          product: currentData,
+        }),
       }
     );
-    
- 
+    const data = await res.json();
+    if (data.success) {
+      window.confirm("Product added successfully");
+    }
   };
+
+  const handlePost = async () => {};
   const handleSelectedForm = (e: any) => {
     const select = e.target.value;
     setNeededFormName((pre) => [...pre, select]);
@@ -80,7 +71,7 @@ const ReusableForm = ({ Specification }: { Specification: ISpecification }) => {
             <Form submitHandler={onSubmit}>
               <div className="p-6.5">
                 <div className="grid grid-cols-12  gap-x-6">
-                  {Specification[neededFormName[currentForm]]?.map(
+                  {Specification[neededFormName[0]]?.map(
                     (Item: any, i: number) => (
                       <div
                         key={i}

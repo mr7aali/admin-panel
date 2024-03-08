@@ -18,7 +18,7 @@ const ManagePost = async () => {
       <ManagePostTitle title="All Products" />
 
       <TableHeader tableHeader={tableHeader} />
-      {productData.map((product, key: number) => (
+      {productData?.map((product, key: number) => (
         <TableBody key={key} product={product} />
       ))}
     </div>

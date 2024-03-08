@@ -40,8 +40,8 @@ const FormInput = ({
         rules={{
           required: `${label} field cannot be empty!`,
           minLength: {
-            value: 2,
-            message: `${label} field must be at least 4 characters long.!`,
+            value: 1,
+            message: `${label} field must be at least 1 characters long.!`,
           },
         }}
         name={name}
@@ -57,8 +57,8 @@ const FormInput = ({
                 className={InputClassName}
               />
             ) : (
-              <select className={InputClassName}>
-                <option value="" className="text-center">
+              <select {...field} className={InputClassName}>
+                <option value="3" className="text-center">
                   --Please choose an option--
                 </option>
                 {selectOption?.map((option) => (
